@@ -316,23 +316,23 @@ class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.r),
+      padding: const EdgeInsets.all(16),
       child: Card(
         elevation: 4,
         child: Row(
           children: [
-            SizedBox(width: 16.w),
+            const SizedBox(width: 16),
             const Opacity(opacity: .7, child: Icon(Icons.search)),
             Expanded(
               child: SizedBox(
-                height: 40.h,
+                height: 48,
                 child: TextField(
                   onTapOutside: (_) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Search (case sensitive)',
-                    contentPadding: EdgeInsets.fromLTRB(8.w, 10.h, 8.w, 10.h),
+                    contentPadding: EdgeInsets.fromLTRB(8, 10, 8, 10),
                   ),
                   onChanged:
                       context.read<CountryHomeProvider>().onSearchQueryChanged,
@@ -343,13 +343,13 @@ class _SearchBar extends StatelessWidget {
               final isLoading = context
                   .select((CountryHomeState state) => state.queryResultLoading);
               return SizedBox.square(
-                dimension: 24.r,
+                dimension: 24,
                 child: isLoading
                     ? const CircularProgressIndicator()
                     : const SizedBox(),
               );
             }),
-            SizedBox(width: 16.w),
+            const SizedBox(width: 16),
           ],
         ),
       ),

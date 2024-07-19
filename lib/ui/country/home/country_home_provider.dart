@@ -13,6 +13,7 @@ class CountryHomeProvider {
   final CountryRepository _repository;
   late CountryHomeState state;
   late List<CountryData> _cachedCountryList;
+  bool isFilterActive = false;
 
   CountryHomeProvider(this._repository) {
     state = CountryHomeState.initial();
@@ -42,15 +43,19 @@ class CountryHomeProvider {
     final result = await _repository.getCountryListByName(name);
 
     result.when((data) {
-      if (data.isEmpty) {
-        state.uiState = UiState.empty;
-        return;
+      if (isFilterActive) {
+        if (data.isEmpty) {
+          state.uiState = UiState.empty;
+          return;
+        }
+        state.countryList = data;
+        state.uiState = UiState.success;
       }
-      state.countryList = data;
-      state.uiState = UiState.success;
     }, (error) {
-      state.errorMessage = error;
-      state.uiState = UiState.error;
+      if (isFilterActive) {
+        state.errorMessage = error;
+        state.uiState = UiState.error;
+      }
     });
 
     state.queryResultLoading = false;
@@ -68,6 +73,7 @@ class CountryHomeProvider {
   /// Sends filter [query] to get response from network with throlling in action.
   void onSearchQueryChanged(String query) {
     if (query.isEmpty) {
+      isFilterActive = false;
       EasyDebounce.cancelAll();
       // Updates UI with initial cached country list.
       state.countryList = _cachedCountryList;
@@ -77,9 +83,11 @@ class CountryHomeProvider {
       state.notifyWidgets();
       return;
     }
+    isFilterActive = true;
 
     state.queryResultLoading = true;
     state.notifyWidgets();
+
     EasyDebounce.debounce(debounceTag, const Duration(milliseconds: 500),
         () => fetchCountryListByName(query));
   }

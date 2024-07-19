@@ -8,7 +8,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: MaterialApp(
+      builder: (context, child) => MaterialApp(
         home: const CountryHomePage(),
         themeMode: ThemeMode.system,
         theme: ThemeData.light(),
