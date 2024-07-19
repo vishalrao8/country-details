@@ -1,0 +1,12 @@
+query GetCountryList() {
+  countries {
+    code
+    name
+    capital
+    currency
+    languages {
+      name
+    }
+    emoji
+  }
+}

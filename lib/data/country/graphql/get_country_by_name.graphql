@@ -1,0 +1,12 @@
+query GetCountryByName($name: String!) {
+  countries (filter: {name: {regex: $name}}) {
+    code
+    name
+    capital
+    currency
+    languages {
+      name
+    }
+    emoji
+  }
+}
