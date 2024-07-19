@@ -18,6 +18,12 @@ class _CountryHomePageState extends State<CountryHomePage> {
   final _provider = getIt<CountryHomeProvider>();
 
   @override
+  void initState() {
+    super.initState();
+    ScreenUtil.init(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -316,40 +322,42 @@ class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.r),
       child: Card(
         elevation: 4,
         child: Row(
           children: [
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             const Opacity(opacity: .7, child: Icon(Icons.search)),
             Expanded(
               child: SizedBox(
-                height: 48,
+                height: 40.h,
                 child: TextField(
                   onTapOutside: (_) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Search (case sensitive)',
-                    contentPadding: EdgeInsets.fromLTRB(8, 10, 8, 10),
+                    contentPadding: EdgeInsets.fromLTRB(8.w, 10.h, 8.w, 10.h),
                   ),
                   onChanged:
                       context.read<CountryHomeProvider>().onSearchQueryChanged,
                 ),
               ),
             ),
-            Builder(builder: (context) {
-              final isLoading = context
-                  .select((CountryHomeState state) => state.queryResultLoading);
-              return SizedBox.square(
-                dimension: 24,
-                child: isLoading
-                    ? const CircularProgressIndicator()
-                    : const SizedBox(),
-              );
-            }),
-            const SizedBox(width: 16),
+            Builder(
+              builder: (context) {
+                final isLoading = context.select(
+                    (CountryHomeState state) => state.queryResultLoading);
+                return SizedBox.square(
+                  dimension: 24.w,
+                  child: isLoading
+                      ? const CircularProgressIndicator()
+                      : const SizedBox(),
+                );
+              },
+            ),
+            SizedBox(width: 16.w),
           ],
         ),
       ),
