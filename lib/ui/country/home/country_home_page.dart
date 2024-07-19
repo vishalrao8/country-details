@@ -150,7 +150,7 @@ class _CountryItem extends StatelessWidget {
               ),
               child: Center(child: Text(country.code)),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             Text(
               country.name,
               style: Theme.of(context).textTheme.titleMedium,
@@ -168,7 +168,7 @@ class _CountryItem extends StatelessWidget {
       builder: (context) {
         return Center(
           child: Container(
-            padding: EdgeInsets.fromLTRB(32.w, 24.h, 32.w, 16),
+            padding: EdgeInsets.fromLTRB(32.w, 24.h, 32.w, 16.h),
             margin: EdgeInsets.all(24.r),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
@@ -183,7 +183,7 @@ class _CountryItem extends StatelessWidget {
                   'Are you sure?',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 TextButtonTheme(
                   data: TextButtonThemeData(
                     style: TextButton.styleFrom(
@@ -243,7 +243,7 @@ class _CountryItem extends StatelessWidget {
                       ),
                       child: Center(child: Text(country.code)),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Text(
                       country.name,
                       style: Theme.of(context).textTheme.headlineSmall,
@@ -264,12 +264,12 @@ class _CountryItem extends StatelessWidget {
                               'Capital',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16.h),
                             Text(
                               'Currency',
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16.h),
                             Text(
                               'Languages',
                               style: Theme.of(context).textTheme.titleMedium,
@@ -285,12 +285,12 @@ class _CountryItem extends StatelessWidget {
                           country.capital,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         Text(
                           country.currency,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         Text(
                           country.languageList.map((e) => e.name).join(', '),
                           style: Theme.of(context).textTheme.titleMedium,
@@ -321,7 +321,7 @@ class _SearchBar extends StatelessWidget {
         elevation: 4,
         child: Row(
           children: [
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             const Opacity(opacity: .7, child: Icon(Icons.search)),
             Expanded(
               child: SizedBox(
@@ -329,9 +329,10 @@ class _SearchBar extends StatelessWidget {
                 child: TextField(
                   onTapOutside: (_) =>
                       FocusManager.instance.primaryFocus?.unfocus(),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.fromLTRB(8, 10, 8, 8),
+                    hintText: 'Search (case sensitive)',
+                    contentPadding: EdgeInsets.fromLTRB(8.w, 10.h, 8.w, 10.h),
                   ),
                   onChanged:
                       context.read<CountryHomeProvider>().onSearchQueryChanged,
@@ -348,7 +349,7 @@ class _SearchBar extends StatelessWidget {
                     : const SizedBox(),
               );
             }),
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
           ],
         ),
       ),
